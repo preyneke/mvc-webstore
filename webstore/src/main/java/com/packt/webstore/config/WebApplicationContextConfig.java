@@ -36,6 +36,7 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	public void configurePathMatch(PathMatchConfigurer configurer) {
 		UrlPathHelper urlPathHelper = new UrlPathHelper();
 		urlPathHelper.setRemoveSemicolonContent(false);
+	
 		
 		configurer.setUrlPathHelper(urlPathHelper);
 	}

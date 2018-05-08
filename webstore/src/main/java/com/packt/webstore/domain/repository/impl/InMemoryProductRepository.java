@@ -1,7 +1,9 @@
 package com.packt.webstore.domain.repository.impl;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,15 @@ public class InMemoryProductRepository implements ProductRepository {
 		jdbcTemplate.update(SQL, params);
 		
 	}
+	@Override
+	public List<Product> getProductsByManufacturer(String manufacturer) {
+		
+		String SQL = "SELECT * FROM PRODUCTS WHERE MANUFACTURER= :manufacturer";
+		Map<String, Object> params = new HashMap<>();
+		params.put("manufacturer", manufacturer);
+		return jdbcTemplate.query(SQL, params, new
+				ProductMapper());
+	}
 	
 	@Override
 	public List<Product> getProductByCategory(String category) {
@@ -50,9 +61,20 @@ public class InMemoryProductRepository implements ProductRepository {
 	
 	@Override
 	public List<Product> getProductsByFilter(Map<String, List<String>> filterParams) {
-		String SQL = "SELECT * FROM PRODUCTS WHERE CATEGORY IN ( :categories) AND MANUFACTURER IN ( :brands)";
-		
+		String SQL = "SELECT * FROM PRODUCTS WHERE UNIT_PRICE > ( :low ) AND      UNIT_PRICE < ( :high)";
+
 		return jdbcTemplate.query(SQL, filterParams, new ProductMapper());
+	}
+
+	
+	@Override
+	public List<Product> getProductsByPrice(BigDecimal low, BigDecimal high) {
+		String SQL = "SELECT * FROM PRODUCTS WHERE UNIT_PRICE > :low  AND UNIT_PRICE <  :high";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("low", low);
+		params.put("high", high);
+		return jdbcTemplate.query(SQL, params, new
+				ProductMapper());
 	}
 
 	@Override
@@ -86,6 +108,23 @@ public class InMemoryProductRepository implements ProductRepository {
 	}
 	}
 
+
+
+	@Override
+	public List<Product> filterProducts(Map<String, List<String>> filterParams) {
+		String SQL = "SELECT * FROM PRODUCTS WHERE UNIT_PRICE > ( :low) AND UNIT_PRICE < ( :high)";
+		
+		return jdbcTemplate.query(SQL, filterParams, new ProductMapper());
+	}
+
+	
+
+	
+	
+
+
+
+	
 
 
 

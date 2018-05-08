@@ -2,8 +2,11 @@ package com.packt.webstore.controller;
 
 
 
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.packt.webstore.domain.Product;
 import com.packt.webstore.service.ProductService;
 
 @Controller
@@ -45,11 +49,44 @@ public class ProductController {
 	return "products";
 	}
 	
-	@RequestMapping("/products/filter/{params}")
-	public String getProductsByFilter(@MatrixVariable(pathVar="params")Map<String, List<String>> filterParams, Model model) {
-		model.addAttribute("products", productService.getProductsByFilter(filterParams));
-		return "products";
+	
+	
+	@RequestMapping("/products/{category}/{price}")
+	public String filterProducts(@PathVariable("category") String category,
+	                             @MatrixVariable(pathVar = "price") Map<String, List<String>> filterParams,
+	                             @RequestParam("manufacturer") String manufacturer,
+	                             Model model) {
+	    Set<Product> filteredProducts = new HashSet<Product>();
+
+	    List<Product> productsByCategory = productService.getProductsByCategory(category);
+	    List<Product> productsByManufacturer = productService.getProductsByManufacturer(manufacturer);
+	    List<Product> productsByPrice = productService.getProductsByFilter(filterParams);
+
+	  
+	    
+
+	    for(Product categoryProduct: productsByCategory) {
+	        for(Product manufacturerProduct: productsByManufacturer) {
+	            for(Product priceProduct: productsByPrice) {
+	                if(priceProduct.equals(manufacturerProduct) && manufacturerProduct.equals(categoryProduct)) {
+	                    filteredProducts.add(priceProduct);
+	                }
+	            }
+	        }
+	    }
+
+	    model.addAttribute("products", filteredProducts);
+
+	    return "products";
 	}
+	
+//	@RequestMapping("/products/filter/{price}")
+//	public String getProductsByFilter(@MatrixVariable(pathVar="price")Map<String, List<String>> filterParams, Model model) {
+//		model.addAttribute("products", productService.getProductsByFilter(filterParams));
+//		return "products";
+//	}
+	
+	
 	
 	@RequestMapping("/product")
 	public String getProductById(@RequestParam("id") String productId, Model model) {
