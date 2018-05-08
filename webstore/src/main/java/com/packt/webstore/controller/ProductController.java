@@ -20,7 +20,7 @@ public class ProductController {
 	private ProductService productService;
 	
 	@RequestMapping("/products")
-	public String list(Model model) {
+	public String productList(Model model) {
 		
 		model.addAttribute("products", productService.getAllProducts());
 		
