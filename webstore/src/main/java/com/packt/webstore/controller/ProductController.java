@@ -80,11 +80,11 @@ public class ProductController {
 	    return "products";
 	}
 	
-//	@RequestMapping("/products/filter/{price}")
-//	public String getProductsByFilter(@MatrixVariable(pathVar="price")Map<String, List<String>> filterParams, Model model) {
-//		model.addAttribute("products", productService.getProductsByFilter(filterParams));
-//		return "products";
-//	}
+	@RequestMapping("/products/filter/{param}")
+	public String getProductsByFilter(@MatrixVariable(pathVar="param")Map<String, List<String>> filterParams, Model model) {
+		model.addAttribute("products", productService.getProductsByFilter(filterParams));
+		return "products";
+	}
 	
 	
 	
