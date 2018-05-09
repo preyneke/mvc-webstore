@@ -25,6 +25,8 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css
 <c:forEach items="${products}" var="product">
 <div class="col-sm-6 col-md-3">
 <div class="thumbnail">
+<img src="<c:url value="/img/${product.productId}.png">
+</c:url>" alt="image" style = "width:100%"/>
 <div class="caption">
 <h3>${product.name}</h3>
 <p>${product.description}</p>
