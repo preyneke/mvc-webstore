@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
 
@@ -27,31 +28,27 @@ bootstrap.min.css">
 			<fieldset>
 				<legend>Add new customer</legend>
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="customerId">Customer Id</label>
+					<label class="control-label col-lg-2 col-lg-2" for="customerId"><spring:message code="addCustomer.form.customerId.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="customerId" path="customerId" type="text"
 							class="form:input-large" />
 					</div>
 					
 					
-					<label class="control-label col-lg-2 col-lg-2" for="name">Name</label>
+					<label class="control-label col-lg-2 col-lg-2" for="name"><spring:message code="addCustomer.form.name.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="name" path="name" type="text"
 							class="form:input-large" />
 					</div>
 					
 					
-					<label class="control-label col-lg-2 col-lg-2" for="manufacturer">Address</label>
+					<label class="control-label col-lg-2 col-lg-2" for="manufacturer"><spring:message code="addCustomer.form.address.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="address" path="address" type="text"
 							class="form:input-large" />
 					</div>
 					
-					<label class="control-label col-lg-2 col-lg-2" for="noOfOrdersMade">Number of Orders Made</label>
-					<div class="col-lg-10">
-						<form:input id="noOfOrdersMade" path="noOfOrdersMade" type="number"
-							class="form:input-large" />
-					</div>
+					
 					
 				</div>
 
