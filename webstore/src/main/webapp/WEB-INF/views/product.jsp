@@ -41,7 +41,7 @@ ${product.category}
 <strong>Available units in stock </strong> :
 ${product.unitsInStock}
 </p>
-<h4>${product.unitPrice} USD</h4>
+<h4>${product.unitPrice} ZAR</h4>
 <p>
 <a href="<spring:url value="/market/products" />" class="btn
 btn-default">

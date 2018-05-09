@@ -8,4 +8,6 @@ public interface CustomerRepository {
 	
 	List<Customer> getAllCustomers();
 
+	void addCustomer(Customer customer);
+
 }

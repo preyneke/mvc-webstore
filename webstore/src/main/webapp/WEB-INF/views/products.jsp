@@ -28,7 +28,7 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css
 <div class="caption">
 <h3>${product.name}</h3>
 <p>${product.description}</p>
-<p>$${product.unitPrice}</p>
+<p>R${product.unitPrice}</p>
 <p>Available ${product.unitsInStock} units in stock</p>
 <p>
 <a href="<spring:url value="/market/product?

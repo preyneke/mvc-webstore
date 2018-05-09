@@ -22,4 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
 		return customers;
 	}
 
+
+	@Override
+	public void addCustomer(Customer customer) {
+		
+		customerRepository.addCustomer(customer);
+		
+	}
+
 }
