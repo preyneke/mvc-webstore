@@ -14,11 +14,17 @@ bootstrap.min.css">
 <title>Customers</title>
 </head>
 <body>
+<section>
+		<div class="pull-right" style="padding-right: 50px">
+			<a href="?language=en">English</a>|<a href="?
+language=nl">Dutch</a>
+		</div>
+	</section>
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Customers</h1>
-				<p>Add Customer</p>
+				<h1><spring:message code="addCustomer.heading.customers.label"/></h1>
+				<p><spring:message code="addCustomer.subheading.addNew.label"/></p>
 			</div>
 		</div>
 	</section>
@@ -26,7 +32,8 @@ bootstrap.min.css">
 		<form:form method="POST" modelAttribute="newCustomer"
 			class="form-horizontal">
 			<fieldset>
-				<legend>Add new customer</legend>
+				<legend><spring:message
+							code="addCustomer.form.addNewCustomer.label" /></legend>
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="customerId"><spring:message code="addCustomer.form.customerId.label"/></label>
 					<div class="col-lg-10">

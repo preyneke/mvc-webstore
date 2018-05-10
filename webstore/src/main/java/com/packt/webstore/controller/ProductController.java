@@ -149,7 +149,7 @@ public class ProductController {
 	public void initialiseBinder(WebDataBinder binder) {
 
 		binder.setAllowedFields("productId", "name", "unitPrice", "description", "manufacturer", "category",
-				"unitsInStock", "condition", "productImage", "productPdf");
+				"unitsInStock", "condition", "productImage", "productPdf", "language" );
 	}
 
 	// exception handeling

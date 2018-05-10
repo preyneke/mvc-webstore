@@ -15,10 +15,18 @@ bootstrap.min.css">
 </head>
 <body>
 	<section>
+		<div class="pull-right" style="padding-right: 50px">
+			<a href="?language=en">English</a>|<a href="?
+language=nl">Dutch</a>
+		</div>
+	</section>
+	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Products</h1>
-				<p>Add products</p>
+				<h1><spring:message
+							code="addProduct.heading.products.label" /></h1>
+				<p><spring:message
+							code="addProduct.subheading.addNew.label" /></p>
 			</div>
 		</div>
 	</section>
@@ -26,7 +34,8 @@ bootstrap.min.css">
 		<form:form method="POST" modelAttribute="newProduct"
 			class="form-horizontal" enctype="multipart/form-data">
 			<fieldset>
-				<legend>Add new product</legend>
+				<legend><spring:message
+							code="addProduct.form.addNewProduct.label" /></legend>
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="productId"><spring:message
 							code="addProduct.form.productId.label" /></label>
@@ -103,8 +112,8 @@ bootstrap.min.css">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-lg-2" for="productPdf">
-							<spring:message code="addProduct.form.productPdf.label" />
+						<label class="control-label col-lg-2" for="productPdf"> <spring:message
+								code="addProduct.form.productPdf.label" />
 						</label>
 						<div class="col-lg-10">
 							<form:input id="productPdf" path="productPdf" type="file"
