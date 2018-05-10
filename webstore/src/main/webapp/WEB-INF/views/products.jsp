@@ -18,6 +18,7 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css
 language=nl">Dutch</a>
 		</div>
 	</section>
+
 <section>
 <div class="jumbotron">
 <div class="container">
