@@ -2,6 +2,12 @@ package com.packt.webstore.domain;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+
+
+
+@XmlRootElement
 public class Customer implements Serializable{
 
 	/**
