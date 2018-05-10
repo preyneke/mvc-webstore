@@ -24,7 +24,7 @@ language=nl">Dutch</a>
 		<div class="jumbotron">
 			<div class="container">
 				<h1><spring:message
-							code="addProduct.heading.products.label" /></h1>
+							code="Product.title.products.label" /></h1>
 				<p><spring:message
 							code="addProduct.subheading.addNew.label" /></p>
 			</div>

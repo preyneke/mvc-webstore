@@ -9,14 +9,20 @@ charset=ISO-8859-1">
 <link rel="stylesheet"
 href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css
 /bootstrap.min.css">
-<title>Products</title>
+<title><spring:message	code="Product.title.products.label" /></title>
 </head>
 <body>
 <section>
+		<div class="pull-right" style="padding-right: 50px">
+			<a href="?language=en">English</a>|<a href="?
+language=nl">Dutch</a>
+		</div>
+	</section>
+<section>
 <div class="jumbotron">
 <div class="container">
-<h1>Products</h1>
-<p>All the available products in our store</p>
+<h1><spring:message	code="Product.title.products.label" /></h1>
+<p><spring:message	code="Product.desc.productsDesc.label" /></p>
 </div>
 </div>
 </section>
