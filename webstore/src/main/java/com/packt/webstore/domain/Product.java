@@ -21,6 +21,7 @@ public class Product implements Serializable {
 	private String name;
 	private BigDecimal unitPrice;
 	private String description;
+
 	private String manufacturer;
 	private String category;
 	private long unitsInStock;
@@ -121,6 +122,10 @@ public class Product implements Serializable {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
+
+	
+	
+
 
 	@Override
 	public boolean equals(Object obj) {

@@ -1,7 +1,5 @@
-<%@taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="spring"
-uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;
@@ -15,7 +13,8 @@ href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css
 <section>
 		<div class="pull-right" style="padding-right: 50px">
 			<a href="?language=en">English</a>|<a href="?
-language=nl">Dutch</a>
+language=nl">Dutch</a>|
+		<a href="<c:url value="/logout" />">Logout</a>
 		</div>
 	</section>
 

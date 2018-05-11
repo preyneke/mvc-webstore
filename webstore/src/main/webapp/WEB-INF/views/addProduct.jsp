@@ -17,7 +17,8 @@ bootstrap.min.css">
 	<section>
 		<div class="pull-right" style="padding-right: 50px">
 			<a href="?language=en">English</a>|<a href="?
-language=nl">Dutch</a>
+language=nl">Dutch</a>|
+		<a href="<c:url value="/logout" />">Logout</a>
 		</div>
 	</section>
 	<section>
@@ -111,6 +112,7 @@ language=nl">Dutch</a>
 								class="form:input-large" />
 						</div>
 					</div>
+
 					<div class="form-group">
 						<label class="control-label col-lg-2" for="productPdf"> <spring:message
 								code="addProduct.form.productPdf.label" />
@@ -121,6 +123,7 @@ language=nl">Dutch</a>
 						</div>
 					</div>
 				</div>
+				 
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
 						<input type="submit" id="btnAdd" class="btn btn-primary"

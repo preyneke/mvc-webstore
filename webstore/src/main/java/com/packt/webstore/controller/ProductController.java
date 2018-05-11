@@ -112,7 +112,8 @@ public class ProductController {
 
 	@RequestMapping(value = "/products/add", method = RequestMethod.POST)
 	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result,
-			HttpServletRequest request) {
+			HttpServletRequest request)
+	{
 		String[] suppressedFields = result.getSuppressedFields();
 
 		if (suppressedFields.length > 0) {
@@ -120,30 +121,28 @@ public class ProductController {
 					+ StringUtils.arrayToCommaDelimitedString(suppressedFields));
 		}
 		MultipartFile productImage = newProduct.getProductImage();
+		MultipartFile productPdf = newProduct.getProductPdf();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		if (productImage != null && !productImage.isEmpty()) {
+		if (productImage != null && !productImage.isEmpty())
+		{
 			try {
 				productImage.transferTo(
 						new File(rootDirectory + "resources\\images\\" + newProduct.getProductId() + ".png"));
 			} catch (Exception e) {
 				throw new RuntimeException("Product Image saving failed", e);
-			}
 		}
-		MultipartFile productPdf = newProduct.getProductPdf();
-		String rootDirectory2 = request.getSession().getServletContext().getRealPath("/");
-
-		if (productPdf != null && !productPdf.isEmpty()) {
-			try {
-				productPdf
-						.transferTo(new File(rootDirectory2 + "resources\\pdf\\" + newProduct.getProductId() + ".pdf"));
-			} catch (Exception e) {
-				throw new RuntimeException("Product User Manual saving failed", e);
-			}
+		}
+		if (productPdf != null && !productPdf.isEmpty())
+		{try {productPdf.transferTo(new File(rootDirectory + "resources\\pdf\\" + newProduct.getProductId() + ".pdf"));
+				} catch (Exception e) {
+					throw new RuntimeException("Product User Manual saving failed", e);
+				}
 		}
 		productService.addProduct(newProduct);
 
 		return "redirect:/market/products";
-	}
+		}
+	
 
 	@InitBinder
 	public void initialiseBinder(WebDataBinder binder) {
