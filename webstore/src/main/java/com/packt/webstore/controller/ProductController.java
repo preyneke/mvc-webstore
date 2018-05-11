@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -111,7 +112,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/products/add", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result,
+	public String processAddNewProductForm(@ModelAttribute("newProduct")@Valid Product newProduct, BindingResult result,
 			HttpServletRequest request)
 	{
 		String[] suppressedFields = result.getSuppressedFields();
@@ -138,6 +139,9 @@ public class ProductController {
 					throw new RuntimeException("Product User Manual saving failed", e);
 				}
 		}
+		if(result.hasErrors()) {
+			return "addProduct";
+			}
 		productService.addProduct(newProduct);
 
 		return "redirect:/market/products";

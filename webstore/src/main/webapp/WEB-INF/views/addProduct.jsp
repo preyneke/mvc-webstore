@@ -34,6 +34,7 @@ language=nl">Dutch</a>|
 	<section class="container">
 		<form:form method="POST" modelAttribute="newProduct"
 			class="form-horizontal" enctype="multipart/form-data">
+			<form:errors path="*" cssClass="alert alert-danger" element="div"/>
 			<fieldset>
 				<legend><spring:message
 							code="addProduct.form.addNewProduct.label" /></legend>
@@ -43,6 +44,7 @@ language=nl">Dutch</a>|
 					<div class="col-lg-10">
 						<form:input id="productId" path="productId" type="text"
 							class="form:input-large" />
+							<form:errors path="productId" cssClass="text-danger"/>
 					</div>
 
 
@@ -51,6 +53,7 @@ language=nl">Dutch</a>|
 					<div class="col-lg-10">
 						<form:input id="name" path="name" type="text"
 							class="form:input-large" />
+							<form:errors path="name" cssClass="text-danger"/>
 					</div>
 
 
@@ -59,6 +62,7 @@ language=nl">Dutch</a>|
 					<div class="col-lg-10">
 						<form:input id="unitPrice" path="unitPrice" type="number"
 							class="form:input-large" />
+							<form:errors path="unitPrice" cssClass="text-danger"/>
 					</div>
 
 					<label class="control-label col-lg-2 col-lg-2" for="manufacturer"><spring:message
@@ -66,12 +70,14 @@ language=nl">Dutch</a>|
 					<div class="col-lg-10">
 						<form:input id="manufacturer" path="manufacturer" type="text"
 							class="form:input-large" />
+							<form:errors path="manufacturer" cssClass="text-danger"/>
 					</div>
 					<label class="control-label col-lg-2 col-lg-2" for="category"><spring:message
 							code="addProduct.form.category.label" /></label>
 					<div class="col-lg-10">
 						<form:input id="category" path="category" type="text"
 							class="form:input-large" />
+							<form:errors path="category" cssClass="text-danger"/>
 					</div>
 
 					<label class="control-label col-lg-2 col-lg-2" for="unitsInStock"><spring:message
@@ -79,6 +85,7 @@ language=nl">Dutch</a>|
 					<div class="col-lg-10">
 						<form:input id="unitsInStock" path="unitsInStock" type="number"
 							class="form:input-large" />
+							<form:errors path="unitsInStock" cssClass="text-danger"/>
 					</div>
 
 
@@ -89,6 +96,7 @@ language=nl">Dutch</a>|
 							code="addProduct.form.description.label" /></label>
 					<div class="col-lg-10">
 						<form:textarea id="description" path="description" rows="2" />
+						<form:errors path="description" cssClass="text-danger"/>
 					</div>
 				</div>
 
@@ -102,6 +110,7 @@ language=nl">Dutch</a>|
 						Old
 						<form:radiobutton path="condition" value="Refurbished" />
 						Refurbished
+						<form:errors path="condition" cssClass="text-danger"/>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-lg-2" for="productImage">
