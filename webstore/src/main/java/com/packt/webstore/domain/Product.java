@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.packt.webstore.validator.Category;
 import com.packt.webstore.validator.ProductId;
 
 @XmlRootElement
@@ -38,6 +39,7 @@ public class Product implements Serializable {
 	@Size(min=3, max=50, message="{Size.Product.manufacturer.validation}")
 	private String manufacturer;
 	@Size(min=3, max=50, message="{Size.Product.category.validation}")
+	@Category(message="Please enter valid Product category")
 	private String category;
 	@Min(value=1, message="{Min.Product.unitsInStock.validation}")
 	private long unitsInStock;

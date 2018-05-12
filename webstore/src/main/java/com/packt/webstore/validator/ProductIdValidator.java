@@ -1,5 +1,6 @@
 package com.packt.webstore.validator;
 
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -13,7 +14,8 @@ public class ProductIdValidator implements ConstraintValidator<ProductId, String
 
 	@Autowired
 	private ProductService productService;
-
+	
+	
 	@Override
 	public void initialize(ProductId constraintAnnotation) {
 		// intentionally left blank; this is the place to initialize the constraint
@@ -26,12 +28,13 @@ public class ProductIdValidator implements ConstraintValidator<ProductId, String
 		Product product;
 		try {
 			product = productService.getProductById(value);
-		} catch (ProductNotFoundException e) {
+			} catch (ProductNotFoundException e) {
 			return true;
-		}
-		if (product != null) {
+			}
+			if(product!= null) {
 			return false;
-		}
-		return true;
-	}
-}
+			}
+			return true;
+			}
+			}
+
