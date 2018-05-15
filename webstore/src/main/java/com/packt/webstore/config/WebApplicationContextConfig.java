@@ -128,6 +128,7 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	registry.addResourceHandler("/img/**")
 	.addResourceLocations("/resources/images/");
 	registry.addResourceHandler("/pdf/**").addResourceLocations("/resources/pdf/");
+	registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	
 	// Interceptor
