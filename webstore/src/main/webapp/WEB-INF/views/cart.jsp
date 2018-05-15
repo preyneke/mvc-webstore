@@ -25,8 +25,8 @@
 			<div>
 				<a class="btn btn-danger pull-left" data-ng-click="clearCart()"> 
 				<span class="glyphicon glyphicon-removesign"></span> Clear Cart </a>
-				<a href="#" class="btn btn-success pull-right"> <span
-					class="glyphicon-shopping-cart glyphicon"></span> Check out
+				<a href="<spring:url value="/checkout?cartId=${cartId}"/>" class="btn btn-success pull-right"> <span
+               class="glyphicon-shopping-cart glyphicon"></span> Check out
 				</a>
 			</div>
 			<table class="table table-hover">
@@ -42,10 +42,9 @@
 					<td>{{item.product.unitPrice}}</td>
 					<td>{{item.quantity}}</td>
 					<td>{{item.totalPrice}}</td>
-					<td><a href="#" class="label labeldanger"
-						data-ng-click="removeFromCart(item.product.productId)"> <span
-							class="glyphicon glyphiconremove" /></span> Remove
-					</a></td>
+					<td><a href="#" class="label label-danger" data-ng-click="removeFromCart(item.product.productId)"> <span
+                     class="glyphicon glyphicon-remove" /></span> Remove
+               </a></td>
 				</tr>
 				<tr>
 					<th></th>

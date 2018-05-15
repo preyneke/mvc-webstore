@@ -51,7 +51,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		
 		String SQL = "INSERT INTO CUSTOMERS (ID, "
 				+ " NAME,"
-				+ " ADDRESS,"
+				+ " PHONE_NUMBER,"
 				+ "NO_OF_ORDERS_MADE) "
 				+ "VALUES ( :id,"
 				+ " :name,"
