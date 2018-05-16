@@ -2,35 +2,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet"
-   href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet"
-   		href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<title>Products</title>
-</head>
-<body>
-	<section>
-		<div class="pull-right" style="padding-right: 50px">
-			<a href="?language=en">English</a>|<a href="?language=nl">Dutch</a>|
-		<a href="<c:url value="/logout" />">Logout</a>
-		</div>
-	</section>
-	<section>
-		<div class="jumbotron">
-			<div class="container">
-				<h1><spring:message
-							code="Product.title.products.label" /></h1>
-				<p><spring:message
-							code="addProduct.subheading.addNew.label" /></p>
-			</div>
-		</div>
-	</section>
 	<section class="container">
 		<form:form method="POST" modelAttribute="newProduct"
 			class="form-horizontal" enctype="multipart/form-data">
@@ -149,5 +121,4 @@
 			</fieldset>
 		</form:form>
 	</section>
-</body>
-</html>
+

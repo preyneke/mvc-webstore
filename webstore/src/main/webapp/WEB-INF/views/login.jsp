@@ -4,32 +4,8 @@
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html;
-charset=ISO-8859-1">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css
-/bootstrap.min.css">
-<title>WebStore Login</title>
-</head>
-<body>
-<body>
-<section>
-		<div class="pull-right" style="padding-right: 50px">
-			<a href="?language=en">English</a>|<a href="?
-language=nl">Dutch</a>
-		</div>
-	</section>
-	<section>
-		<div class="jumbotron">
-			<div class="container">
-				<h1><spring:message	code="login.h1.welcome.label" /></h1>
-				<p><spring:message code="login.p.welcome.label"/></p>
-			</div>
-		</div>
-	</section>
-	<div class="container">
+
+	<section class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 				<div class="panel panel-default">
@@ -74,5 +50,6 @@ language=nl">Dutch</a>
 				</div>
 			</div>
 		</div>
-	</div>
-</body>
+	</section>
+
+

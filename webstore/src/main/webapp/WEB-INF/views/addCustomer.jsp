@@ -2,32 +2,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<!DOCTYPE html>
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html;
-charset=ISO-8859-1">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/
-bootstrap.min.css">
-<title>Customers</title>
-</head>
-<body>
-<section>
-		<div class="pull-right" style="padding-right: 50px">
-			<a href="?language=en">English</a>|<a href="?
-language=nl">Dutch</a>
-		</div>
-	</section>
-	<section>
-		<div class="jumbotron">
-			<div class="container">
-				<h1><spring:message code="addCustomer.heading.customers.label"/></h1>
-				<p><spring:message code="addCustomer.subheading.addNew.label"/></p>
-			</div>
-		</div>
-	</section>
 	<section class="container">
 		<form:form method="POST" modelAttribute="newCustomer"
 			class="form-horizontal">
@@ -68,5 +43,4 @@ language=nl">Dutch</a>
 			</fieldset>
 		</form:form>
 	</section>
-</body>
-</html>
+
