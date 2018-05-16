@@ -25,6 +25,8 @@ public class CartItem implements Serializable{
 
 	public void setProduct(Product product) {
 		this.product = product;
+		this.quantity = 1;
+		this.updateTotalPrice();
 	}
 
 	public int getQuantity() {
