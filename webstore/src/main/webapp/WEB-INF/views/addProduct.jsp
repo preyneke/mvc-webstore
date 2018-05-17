@@ -100,16 +100,8 @@
 								class="btn btn-default" />
 						</div>
 					</div>
-
-					<div class="form-group">
-						<label class="control-label col-lg-2" for="productPdf"> <spring:message
-								code="addProduct.form.productPdf.label" />
-						</label>
-						<div class="col-lg-10">
-							<form:input id="btnPDF" path="productPdf" type="file" 
-								class="btn btn-default" />
-						</div>
-					</div>
+			
+					
 				
 				 
 				<div class="form-group">

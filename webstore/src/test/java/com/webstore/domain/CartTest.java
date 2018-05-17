@@ -1,13 +1,17 @@
-package com.packt.webstore.domain;
+package com.webstore.domain;
 
 import java.math.BigDecimal;
-import java.nio.channels.NetworkChannel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.packt.webstore.domain.Cart;
+import com.packt.webstore.domain.CartItem;
+import com.packt.webstore.domain.Product;
 
 public class CartTest {
 	

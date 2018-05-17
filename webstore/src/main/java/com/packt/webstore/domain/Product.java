@@ -14,43 +14,33 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.packt.webstore.validator.Category;
 import com.packt.webstore.validator.ProductId;
 
 @XmlRootElement
 public class Product implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3678107792576131001L;
-	
+
 	@Pattern(regexp="P[1-9]+", message="{Pattern.Product.productId.validation}")
-	@ProductId
+	@ProductId 
 	private String productId;
+	
 	@Size(min=4, max=50, message="{Size.Product.name.validation}")
 	private String name;
+	
 	@Min(value=0, message="{Min.Product.unitPrice.validation}")
-	@Digits(integer=8,fraction=2, message="{Digits.Product.unitPrice.validation}")
+	@Digits(integer=8, fraction=2, message="{Digits.Product.unitPrice.validation}")
 	@NotNull(message= "{NotNull.Product.unitPrice.validation}")
 	private BigDecimal unitPrice;
-	@Size(min=4, max=50, message="{Size.Product.description.validation}")
 	private String description;
-	@Size(min=3, max=50, message="{Size.Product.manufacturer.validation}")
 	private String manufacturer;
-	@Size(min=3, max=50, message="{Size.Product.category.validation}")
-	@Category(message="Please enter valid Product category")
 	private String category;
-	@Min(value=1, message="{Min.Product.unitsInStock.validation}")
 	private long unitsInStock;
 	private long unitsInOrder;
 	private boolean discontinued;
-	@NotNull(message= "{NotNull.Product.condition.validation}")
 	private String condition;
 	@JsonIgnore
 	private MultipartFile productImage;
-	@JsonIgnore
-	private MultipartFile productPdf;
 
 	public Product() {
 		super();
@@ -142,9 +132,14 @@ public class Product implements Serializable {
 		this.condition = condition;
 	}
 
-	
-	
+	@XmlTransient
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
 
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -162,26 +157,6 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	@XmlTransient
-	public MultipartFile getProductImage() {
-		return productImage;
-	}
-
-	public void setProductImage(MultipartFile productImage) {
-		this.productImage = productImage;
-	}
-	
-	
-	@XmlTransient
-	public MultipartFile getProductPdf() {
-		return productPdf;
-	}
-
-	public void setProductPdf(MultipartFile productPdf) {
-		this.productPdf = productPdf;
-	}
 
 	@Override
 	public int hashCode() {
@@ -190,5 +165,4 @@ public class Product implements Serializable {
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		return result;
 	}
-
 }

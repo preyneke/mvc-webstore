@@ -1,10 +1,13 @@
-package com.packt.webstore.domain;
+package com.webstore.domain;
 
 import java.math.BigDecimal;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.packt.webstore.domain.CartItem;
+import com.packt.webstore.domain.Product;
 
 
 
