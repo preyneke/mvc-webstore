@@ -14,8 +14,10 @@ public class Customer implements Serializable {
 	private String name;
 	
 	private String phoneNumber;
+	private Address billingAddress;
 
 	public Customer() {
+		this.billingAddress = new Address();
 	}
 
 	public Customer(String customerId, String name) {
@@ -75,6 +77,14 @@ public class Customer implements Serializable {
 		} else if (!customerId.equals(other.customerId))
 			return false;
 		return true;
+	}
+
+	public Address getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
 	}
 
 	

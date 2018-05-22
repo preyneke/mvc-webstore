@@ -9,10 +9,12 @@ private String areaName;
 private String state;
 private String country;
 private String zipCode;
-private Customer customer;
+private String customerId;
 
 
-
+public Address() {
+	
+}
 public Long getId() {
 return id;
 }
@@ -68,16 +70,15 @@ return id;
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
 	
 	
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 
 	@Override
 	public int hashCode() {
@@ -103,4 +104,6 @@ return id;
 			return false;
 		return true;
 	}
+	
+	
 }

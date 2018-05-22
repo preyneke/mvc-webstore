@@ -54,12 +54,14 @@ public class InMemoryOrderRepository implements OrderRepository {
 					}
 		private String saveCustomer(Customer customer) {
 			
-			String SQL = "INSERT INTO CUSTOMER(CUSTOMER_ID, NAME,PHONE_NUMBER,BILLING_ADDRESS_ID) "
-			+ "VALUES (:custId, :name, :phoneNumber";
+			String SQL = "INSERT INTO CUSTOMER(CUSTOMER_ID, NAME,PHONE_NUMBER, BILLING_ADDRESS) "
+			+ "VALUES (:custId, :name, :phoneNumber :billingAddress";
+			long addressId = saveAddress(customer.getBillingAddress());
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("name", customer.getName());
 			params.put("phoneNumber", customer.getPhoneNumber());
 			params.put("custId", customer.getCustomerId());
+			params.put("billingAddress", addressId);
 			jdbcTempleate.update(SQL, params);
 			
 			
@@ -68,7 +70,7 @@ public class InMemoryOrderRepository implements OrderRepository {
 		
 		private long saveAddress(Address address) {
 			String SQL = "INSERT INTO ADDRESS(DOOR_NO,STREET_NAME,AREA_NAME,STATE,COUNTRY,ZIP,CUSTOMER_ID) "
-			+ "VALUES (:doorNo, :streetName, :areaName, :state, :country, :zip, :custId)";
+			+ "VALUES (:doorNo, :streetName, :areaName, :state, :country, :zip, :customerId)";
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("doorNo", address.getDoorNo());
 			params.put("streetName", address.getStreetName());
@@ -76,7 +78,7 @@ public class InMemoryOrderRepository implements OrderRepository {
 			params.put("state", address.getState());
 			params.put("country", address.getCountry());
 			params.put("zip", address.getZipCode());
-			params.put("custId", address.getCustomer().getCustomerId());
+			params.put("customerId", address.getCustomerId());
 			SqlParameterSource paramSource = new
 			MapSqlParameterSource(params);
 			KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -84,6 +86,8 @@ public class InMemoryOrderRepository implements OrderRepository {
 			String[]{"ID"});
 			return keyHolder.getKey().longValue();
 			}
+		
+		
 		private long createOrder(Order order) {
 			String SQL = "INSERT INTO ORDERS(CART_ID,CUSTOMER_ID,SHIPPING_DETAIL_ID) "
 			+ "VALUES (:cartId, :custId, :shippingDetailId)";

@@ -85,6 +85,12 @@ String[] suppressedFields = result.getSuppressedFields();
 		binder.setAllowedFields("customerId",
 									"name",
 									"phoneNumber",
+									"billingAddress.doorNo",
+									"billingAddress.streetName",
+									"billingAddress.areaName",
+									"billingAddress.state",
+									"billingAddress.country",
+									"billingAddress.zipCode",
 									"language");
 		binder.setValidator(customerValidator);
 	}

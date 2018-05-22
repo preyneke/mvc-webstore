@@ -7,15 +7,16 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-
+import com.packt.webstore.domain.Address;
 import com.packt.webstore.domain.Customer;
-
 import com.packt.webstore.domain.repository.CustomerRepository;
-
 import com.packt.webstore.exception.CustomerNotFoundException;
 
 
@@ -35,22 +36,47 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 				return result;
 		
 	}
+	
+	
 
 
 	@Override
 	public void createCustomer(Customer customer) {
+		long addressId = saveAddress(customer.getBillingAddress());
+		
 		String SQL = "INSERT INTO CUSTOMERS (CUSTOMER_ID,"
 				+"NAME,"
-				+"PHONE_NUMBER)"
-				+" VALUES( :custId, :name, :phoneNumber)";
+				+"PHONE_NUMBER, BILLING_ADDRESS)"
+				+" VALUES( :custId, :name, :phoneNumber, :billingAddress)";
+		
 		Map<String, Object> params = new HashMap<>();
 		params.put("custId", customer.getCustomerId());
 		params.put("name", customer.getName());
 		params.put("phoneNumber", customer.getPhoneNumber());
+		params.put("billingAddress", addressId);
 		
 		jdbcTempleate.update(SQL, params);
 		
+		
 	}
+	private long saveAddress(Address address) {
+		String SQL = "INSERT INTO ADDRESS(DOOR_NO,STREET_NAME,AREA_NAME,STATE,COUNTRY,ZIP) "
+		+ "VALUES (:doorNo, :streetName, :areaName, :state, :country, :zip)";
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("doorNo", address.getDoorNo());
+		params.put("streetName", address.getStreetName());
+		params.put("areaName", address.getAreaName());
+		params.put("state", address.getState());
+		params.put("country", address.getCountry());
+		params.put("zip", address.getZipCode());
+		SqlParameterSource paramSource = new
+		MapSqlParameterSource(params);
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		jdbcTempleate.update(SQL, paramSource,keyHolder, new
+		String[]{"ID"});
+		return keyHolder.getKey().longValue();
+		}
 
 
 	@Override
@@ -65,10 +91,10 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 
 
 	@Override
-	public void deleteCustomer(String custId) {
-		String DELETE_CUSTOMER = "DELETE FROM CUSTOMER WHERE CUSTOMER_ID= :custId";
-		Map<String, Object> params = new HashMap<>();
-		params.put("custId", custId);
+	public void deleteCustomer(String customerId) {
+		String DELETE_CUSTOMER = "DELETE FROM CUSTOMER WHERE CUSTOMER_ID= :cusomertId";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("customerId", customerId);
 		
 		jdbcTempleate.update(DELETE_CUSTOMER, params);
 		
@@ -86,6 +112,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		throw new CustomerNotFoundException(customerId);
 		}
 		}
+	
 
 
 }
