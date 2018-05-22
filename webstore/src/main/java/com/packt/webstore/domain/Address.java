@@ -9,7 +9,7 @@ private String areaName;
 private String state;
 private String country;
 private String zipCode;
-private String customerId;
+
 
 
 public Address() {
@@ -70,12 +70,7 @@ return id;
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	public String getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
-	}
+	
 	
 	
 

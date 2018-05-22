@@ -10,14 +10,7 @@
 			<fieldset>
 				<legend><spring:message
 							code="addCustomer.form.addNewCustomer.label" /></legend>
-				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="customerId"><spring:message code="addCustomer.form.customerId.label"/></label>
-					<div class="col-lg-10">
-						<form:input id="customerId" path="customerId" type="text"
-							class="form:input-large" />
-							<form:errors path="customerId" cssClass="text-danger"/>
-					</div>
-					</div>
+				
 					
 					<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="name"><spring:message code="addCustomer.form.name.label"/></label>

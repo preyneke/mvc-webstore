@@ -44,21 +44,23 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 	public void createCustomer(Customer customer) {
 		long addressId = saveAddress(customer.getBillingAddress());
 		
-		String SQL = "INSERT INTO CUSTOMERS (CUSTOMER_ID,"
-				+"NAME,"
-				+"PHONE_NUMBER, BILLING_ADDRESS)"
-				+" VALUES( :custId, :name, :phoneNumber, :billingAddress)";
+		String SQL = "INSERT INTO CUSTOMERS(NAME,PHONE_NUMBER,BILLING_ADDRESS) "
+				+ "VALUES (:name, :phoneNumber, :addressId)";
+				Map<String, Object> params = new HashMap<String, Object>();
+				params.put("name", customer.getName());
+				params.put("phoneNumber", customer.getPhoneNumber());
+				params.put("addressId", addressId);
 		
-		Map<String, Object> params = new HashMap<>();
-		params.put("custId", customer.getCustomerId());
-		params.put("name", customer.getName());
-		params.put("phoneNumber", customer.getPhoneNumber());
-		params.put("billingAddress", addressId);
+				SqlParameterSource paramSource = new
+						MapSqlParameterSource(params);
+						KeyHolder keyHolder = new GeneratedKeyHolder();
+						jdbcTempleate.update(SQL, paramSource,keyHolder, new
+						String[]{"ID"});
+						
+						}
 		
-		jdbcTempleate.update(SQL, params);
 		
-		
-	}
+	
 	private long saveAddress(Address address) {
 		String SQL = "INSERT INTO ADDRESS(DOOR_NO,STREET_NAME,AREA_NAME,STATE,COUNTRY,ZIP) "
 		+ "VALUES (:doorNo, :streetName, :areaName, :state, :country, :zip)";
@@ -70,6 +72,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		params.put("state", address.getState());
 		params.put("country", address.getCountry());
 		params.put("zip", address.getZipCode());
+		
 		SqlParameterSource paramSource = new
 		MapSqlParameterSource(params);
 		KeyHolder keyHolder = new GeneratedKeyHolder();

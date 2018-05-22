@@ -2,15 +2,15 @@ package com.packt.webstore.domain;
 
 import java.io.Serializable;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
-import com.packt.webstore.validator.CustomerId;
+
+
 
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 2284040482222162898L;
-	@CustomerId
-	@NotEmpty
-	private String customerId;
+	
+
+	private Long customerId;
 	private String name;
 	
 	private String phoneNumber;
@@ -20,17 +20,17 @@ public class Customer implements Serializable {
 		this.billingAddress = new Address();
 	}
 
-	public Customer(String customerId, String name) {
+	public Customer(Long customerId, String name) {
 		this();
 		this.customerId = customerId;
 		this.name = name;
 	}
 
-	public String getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 

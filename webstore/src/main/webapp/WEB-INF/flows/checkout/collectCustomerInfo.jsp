@@ -28,12 +28,7 @@
       <form:form modelAttribute="order.customer" class="form-horizontal">
          <fieldset>
             <legend>Customer Details</legend>
-            <div class="form-group">
-               <label class="control-label col-lg-2" for="custId">Customer ID</label>
-               <div class="col-lg-10">
-                  <form:input id="customerId" path="customerId" type="text" class="form:input-large" />
-               </div>
-            </div>
+           
             <div class="form-group">
                <label class="control-label col-lg-2" for="name">Name</label>
                <div class="col-lg-10">

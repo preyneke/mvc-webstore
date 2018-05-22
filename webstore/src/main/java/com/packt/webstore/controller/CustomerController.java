@@ -82,8 +82,7 @@ String[] suppressedFields = result.getSuppressedFields();
 	
 	@InitBinder
 	public void initialiseBinder(WebDataBinder binder) {
-		binder.setAllowedFields("customerId",
-									"name",
+		binder.setAllowedFields("name",
 									"phoneNumber",
 									"billingAddress.doorNo",
 									"billingAddress.streetName",
