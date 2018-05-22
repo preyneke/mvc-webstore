@@ -9,6 +9,10 @@ private String areaName;
 private String state;
 private String country;
 private String zipCode;
+private Customer customer;
+
+
+
 public Long getId() {
 return id;
 }
@@ -63,6 +67,16 @@ return id;
 
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+	
+	
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Override

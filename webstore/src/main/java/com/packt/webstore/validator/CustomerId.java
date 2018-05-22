@@ -14,12 +14,16 @@ import javax.validation.Payload;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy= ProductIdValidator.class)
+@Constraint(validatedBy= CustomerIdValidator.class)
 @Documented
-public @interface ProductId {
-	String message() default "{com.packt.webstore.validator.ProductId.message}";
+public @interface CustomerId {
 
-	Class<?>[] groups() default {};
-	public abstract Class<? extends Payload>[] payload()
-	default {};
-}
+		String message() default "{addCustomer.validation.customerIdAleadyExist.label}";
+
+		Class<?>[] groups() default {};
+		public abstract Class<? extends Payload>[] payload()
+		default {};
+	}
+
+
+

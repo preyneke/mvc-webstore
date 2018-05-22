@@ -24,10 +24,23 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 	@Override
-	public void addCustomer(Customer customer) {
+	public void createCustomer(Customer customer) {
 		
-		customerRepository.addCustomer(customer);
+		customerRepository.createCustomer(customer);
+		
 		
 	}
+
+
+	@Override
+	public Customer getCustomerById(String customerId) {
+		
+		return customerRepository.getCustomerById(customerId);
+	}
+
+
+	
+		
+	
 
 }

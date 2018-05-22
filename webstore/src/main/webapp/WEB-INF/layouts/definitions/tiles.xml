@@ -27,6 +27,13 @@
       <put-attribute name="content" value="/WEB-INF/views/products.jsp" />
    </definition>
    
+   <definition name="customers" extends="baseLayout">
+      <put-attribute name="title" value="Customers" />
+      <put-attribute name="heading" value="Customers" />
+      <put-attribute name="tagline" value="All the customers in our store" />
+      <put-attribute name="content" value="/WEB-INF/views/customers.jsp" />
+   </definition>
+   
    <definition name="product" extends="baseLayout">
       <put-attribute name="title" value="Product" />
       <put-attribute name="heading" value="Product" />
@@ -39,6 +46,13 @@
       <put-attribute name="heading" value="Products" />
       <put-attribute name="tagline" value="Add Product" />
       <put-attribute name="content" value="/WEB-INF/views/addProduct.jsp" />
+   </definition>
+   
+   <definition name="addCustomer" extends="baseLayout">
+      <put-attribute name="title" value="Customers" />
+      <put-attribute name="heading" value="Customers" />
+      <put-attribute name="tagline" value="Add Customer" />
+      <put-attribute name="content" value="/WEB-INF/views/addCustomer.jsp" />
    </definition>
    
    <definition name="login" extends="baseLayout">

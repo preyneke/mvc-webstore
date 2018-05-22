@@ -6,6 +6,7 @@
 	<section class="container">
 		<form:form method="POST" modelAttribute="newCustomer"
 			class="form-horizontal">
+			<form:errors path="*" cssClass="alert alert-danger" element="div"/>
 			<fieldset>
 				<legend><spring:message
 							code="addCustomer.form.addNewCustomer.label" /></legend>
@@ -14,25 +15,28 @@
 					<div class="col-lg-10">
 						<form:input id="customerId" path="customerId" type="text"
 							class="form:input-large" />
+							<form:errors path="customerId" cssClass="text-danger"/>
+					</div>
 					</div>
 					
-					
+					<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="name"><spring:message code="addCustomer.form.name.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="name" path="name" type="text"
 							class="form:input-large" />
 					</div>
+					</div>
 					
-					
-					<label class="control-label col-lg-2 col-lg-2" for="manufacturer"><spring:message code="addCustomer.form.address.label"/></label>
+					<div class="form-group">
+					<label class="control-label col-lg-2 col-lg-2" for="phoneNumber"><spring:message code="addCustomer.form.phoneNumber.label"/></label>
 					<div class="col-lg-10">
-						<form:input id="address" path="address" type="text"
+						<form:input id="phoneNumber" path="phoneNumber" type="text"
 							class="form:input-large" />
+					</div>
 					</div>
 					
 					
-					
-				</div>
+				
 
 				
 				<div class="form-group">

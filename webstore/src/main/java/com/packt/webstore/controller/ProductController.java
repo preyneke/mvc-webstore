@@ -50,6 +50,8 @@ public class ProductController {
 
 		return "products";
 	}
+	
+
 
 	@RequestMapping("/update/stock")
 	public String updateStock(Model model) {
@@ -100,9 +102,10 @@ public class ProductController {
 		return "products";
 	}
 
-	@RequestMapping("/product")
-	public String getProductById(@RequestParam("id") String productId, Model model) {
+	@RequestMapping(value="/product", method =  RequestMethod.GET)
+	public String getProductById(@RequestParam(value = "id", required=false) String productId, Model model) {
 		model.addAttribute("product", productService.getProductById(productId));
+		
 		return "product";
 
 	}

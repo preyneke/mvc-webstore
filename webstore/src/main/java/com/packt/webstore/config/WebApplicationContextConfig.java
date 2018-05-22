@@ -38,6 +38,7 @@ import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.interceptor.ProcessingTimeLogInterceptor;
 import com.packt.webstore.interceptor.PromoCodeInterceptor;
+import com.packt.webstore.validator.CustomerValidator;
 //import com.packt.webstore.validator.ProductImageValidator;
 import com.packt.webstore.validator.ProductValidator;
 import com.packt.webstore.validator.UnitsInStockValidator;
@@ -188,4 +189,14 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	productValidator.setSpringValidators(springValidators);
 	return productValidator;
 	}
+	
+	@Bean
+	public CustomerValidator customerValidator () {
+		
+	CustomerValidator customerValidator = new CustomerValidator();
+	return customerValidator;
+	}
+	
+	
+	
 }

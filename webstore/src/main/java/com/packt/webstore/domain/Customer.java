@@ -2,29 +2,33 @@ package com.packt.webstore.domain;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.packt.webstore.validator.CustomerId;
+
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 2284040482222162898L;
-	private Long customerId;
+	@CustomerId
+	@NotEmpty
+	private String customerId;
 	private String name;
-	private Address billingAddress;
+	
 	private String phoneNumber;
 
 	public Customer() {
-		super();
-		this.billingAddress = new Address();
 	}
 
-	public Customer(Long customerId, String name) {
+	public Customer(String customerId, String name) {
 		this();
 		this.customerId = customerId;
 		this.name = name;
 	}
 
-	public Long getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(long customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 
@@ -36,13 +40,7 @@ public class Customer implements Serializable {
 		this.name = name;
 	}
 
-	public Address getBillingAddress() {
-		return billingAddress;
-	}
-
-	public void setBillingAddress(Address billingAddress) {
-		this.billingAddress = billingAddress;
-	}
+	
 
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -52,9 +50,7 @@ public class Customer implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -80,4 +76,6 @@ public class Customer implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 }

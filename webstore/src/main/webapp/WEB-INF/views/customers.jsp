@@ -7,9 +7,9 @@
 					<div class="thumbnail">
 						<div class="caption">
 							<h3>${customer.name}</h3>
-							<p>${customer.address}</p>
+							<p>${customer.phoneNumber}</p>
 
-							<p>Number of orders made: ${customer.noOfOrdersMade}</p>
+							<p></p>
 						</div>
 					</div>
 				</div>
