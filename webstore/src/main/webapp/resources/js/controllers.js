@@ -35,3 +35,4 @@ cartApp.controller('cartCtrl', function($scope, $http) {
             });
     };
 });
+var custApp = angular.model('custApp', []);

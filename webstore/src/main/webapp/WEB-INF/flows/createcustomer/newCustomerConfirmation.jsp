@@ -35,7 +35,11 @@
                      <address>
                         <strong>Customer</strong> <br>
                         ${newCustomer.name}<br>
-                       
+                         ${newCustomer.billingAddress.doorNo},${newCustomer.billingAddress.streetName}
+                        <br>
+                        ${newCustomer.billingAddress.areaName},${newCustomer.billingAddress.state}
+                        <br>
+                        ${newCustomer.billingAddress.country},${newCustomer.billingAddress.zipCode}
                         <br> <abbr title="Phone">P:</abbr>
                         ${newCustomer.phoneNumber}
                      </address>

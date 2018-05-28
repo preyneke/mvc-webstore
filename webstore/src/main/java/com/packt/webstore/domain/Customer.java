@@ -1,8 +1,7 @@
 package com.packt.webstore.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+
 
 
 
@@ -15,13 +14,14 @@ public class Customer implements Serializable {
 	private Long customerId;
 	private String name;
 	private String phoneNumber;
-	private Set<Address>addresses= new HashSet<Address>(); 
+	private Address billingAddress;
+	 
 
 	
 
 	public Customer() {
-		
-		
+		this.billingAddress = new Address();
+	
 		
 	}
 	
@@ -33,34 +33,7 @@ public class Customer implements Serializable {
 		
 	}
 	
-	public void addAddress (Address address) {
-		addresses.add(address);
-		
-	}
-	public boolean removeAddress(Address address) {
-		for(Address custAddress : addresses) {
-			if(custAddress == address) {
-				addresses.remove(custAddress);
-				return true;
-			} 
-				
-			} return false;
-	}
 	
-	public Address getAddressById (Long addressId) {
-		return addresses.stream().filter(address -> address.getId().equals(addressId)).findAny().orElse(null);
-	}
-	
-	public Address getBillingAddress(Set<Address> addresses) {
-		this.addresses = addresses;
-		for(Address custAddress : addresses) {
-			if (custAddress.isBillingAddress()) {
-				return custAddress;
-			}
-		}
-		return null;
-	}
-		
 	
 
 	public Long getCustomerId() {
@@ -86,13 +59,7 @@ public class Customer implements Serializable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public Set<Address> getAddresses() {
-		return addresses;
-	}
 
-	public void setAddresses(Set<Address> addresses) {
-		this.addresses = addresses;
-	}
 	
 
 	@Override
@@ -122,8 +89,7 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", name=" + name + ", phoneNumber=" + phoneNumber + ", addresses="
-				+ addresses + "]";
+		return "Customer [customerId=" + customerId + ", name=" + name + ", phoneNumber=" + phoneNumber + "]";
 	}
 
 	public void setCustomerId(Long customerId) {
@@ -132,6 +98,18 @@ public class Customer implements Serializable {
 	}
 
 
+
+	public Address getBillingAddress() {
+		return billingAddress;
+	}
+
+
+
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+
+	
 
 	
 

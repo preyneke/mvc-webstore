@@ -23,11 +23,14 @@ import com.packt.webstore.service.CustomerService;
 
 
 
+
 @Repository
 public class InMemoryCustomerRepository implements CustomerRepository {
 
 	 @Autowired
 	   private NamedParameterJdbcTemplate jdbcTempleate;
+	 @Autowired
+		private CustomerService customerService;
 	 
 	
 	   
@@ -37,7 +40,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 	public List<Customer> getAllCustomers() {
 		Map<String, Object> params = new HashMap<String,
 				Object>();
-				List<Customer> result = jdbcTempleate.query("SELECT * FROM CUSTOMERS", params, new CustomerMapper());
+				List<Customer> result = jdbcTempleate.query("SELECT * FROM CUSTOMERS", params, new CustomerMapper(jdbcTempleate, customerService));
 				return result;
 		
 	}
@@ -47,7 +50,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 
 	@Override
 	public Long createCustomer(Customer newCustomer) {
-		long billingAddressId = 0;
+		long billingAddressId = saveBillingAddress(newCustomer.getBillingAddress());
 		
 		String SQL = "INSERT INTO CUSTOMERS(NAME,PHONE_NUMBER,BILLING_ADDRESS_ID) "
 				+ "VALUES (:name, :phoneNumber, :billingAddressId)";
@@ -70,7 +73,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 	
 	private long saveBillingAddress(Address address) {
 		String SQL = "INSERT INTO ADDRESS(DOOR_NO,STREET_NAME,AREA_NAME,STATE,COUNTRY,ZIP) "
-		+ "VALUES (:doorNo, :streetName, :areaName, :state, :country, :zip, :billingAddress)";
+		+ "VALUES (:doorNo, :streetName, :areaName, :state, :country, :zip )";
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("doorNo", address.getDoorNo());
@@ -79,7 +82,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		params.put("state", address.getState());
 		params.put("country", address.getCountry());
 		params.put("zip", address.getZipCode());
-		params.put("billingAddress", address.isBillingAddress());
+		
 		
 		SqlParameterSource paramSource = new
 		MapSqlParameterSource(params);
@@ -95,7 +98,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		String SQL = "SELECT * CUSTOMER WHERE CUSTOMER_ID = :cust_Id";
 		Map<String, Object> params = new HashMap<>();
 		params.put("cust_Id", custId);
-		return jdbcTempleate.query(SQL, params, new CustomerMapper());
+		return jdbcTempleate.query(SQL, params, new CustomerMapper(jdbcTempleate, customerService));
 		
 		
 	}
@@ -118,7 +121,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", customerId);
 		try {
-		return jdbcTempleate.queryForObject(SQL, params, new CustomerMapper());
+		return jdbcTempleate.queryForObject(SQL, params, new CustomerMapper(jdbcTempleate, customerService));
 		} catch (DataAccessException e) {
 		throw new CustomerNotFoundException(customerId);
 		}
@@ -133,7 +136,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		Map<String, Object> params = new HashMap<>();
 		params.put("addressId", addressId);
 		try {
-			return jdbcTempleate.queryForObject(SQL, params, new AddressMapper());
+			return jdbcTempleate.queryForObject(SQL, params, new AddressMapper(customerService));
 			} catch (DataAccessException e) {
 			throw new AddressNotFoundException(addressId);
 			}
