@@ -37,7 +37,7 @@ public class InMemoryOrderRepository implements OrderRepository {
 		return createdOrderId;
 	}
 		private long saveShippingDetail (ShippingDetail shippingDetail) {
-			long addressId = saveAddress(shippingDetail.getShippingAddress());
+			long addressId = saveBillingAddress(shippingDetail.getShippingAddress());
 					String SQL = "INSERT INTO SHIPPING_DETAIL(NAME,SHIPPING_DATE,SHIPPING_ADDRESS_ID) "
 					+ "VALUES (:name, :shippingDate, :addressId)";
 					
@@ -57,11 +57,11 @@ public class InMemoryOrderRepository implements OrderRepository {
 			
 			String SQL = "INSERT INTO CUSTOMERS(NAME,PHONE_NUMBER, BILLING_ADDRESS) "
 			+ "VALUES ( :name, :phoneNumber, :billingAddress)";
-			long addressId = saveAddress(customer.getBillingAddress());
+			long billingAddressId = saveBillingAddress(customer.getBillingAddress(customer.getAddresses()));
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("name", customer.getName());
 			params.put("phoneNumber", customer.getPhoneNumber());
-			params.put("billingAddress", addressId);
+			params.put("billingAddress", billingAddressId);
 			
 			SqlParameterSource paramSource = new
 					MapSqlParameterSource(params);
@@ -71,7 +71,7 @@ public class InMemoryOrderRepository implements OrderRepository {
 					return keyHolder.getKey().longValue();
 		}
 		
-		private long saveAddress(Address address) {
+		private long saveBillingAddress(Address address) {
 			String SQL = "INSERT INTO ADDRESS(DOOR_NO,STREET_NAME,AREA_NAME,STATE,COUNTRY,ZIP) "
 			+ "VALUES (:doorNo, :streetName, :areaName, :state, :country, :zip)";
 			Map<String, Object> params = new HashMap<String, Object>();

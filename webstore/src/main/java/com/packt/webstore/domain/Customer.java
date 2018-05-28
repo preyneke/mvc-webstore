@@ -1,6 +1,8 @@
 package com.packt.webstore.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 
 
@@ -12,27 +14,60 @@ public class Customer implements Serializable {
 
 	private Long customerId;
 	private String name;
-	
 	private String phoneNumber;
-	private Address billingAddress;
+	private Set<Address>addresses= new HashSet<Address>(); 
+
+	
 
 	public Customer() {
-		this.billingAddress = new Address();
+		
+		
+		
 	}
+	
+	
 
-	public Customer(Long customerId, String name) {
-		this();
+	public Customer(Long customerId) {
+		
 		this.customerId = customerId;
-		this.name = name;
+		
 	}
+	
+	public void addAddress (Address address) {
+		addresses.add(address);
+		
+	}
+	public boolean removeAddress(Address address) {
+		for(Address custAddress : addresses) {
+			if(custAddress == address) {
+				addresses.remove(custAddress);
+				return true;
+			} 
+				
+			} return false;
+	}
+	
+	public Address getAddressById (Long addressId) {
+		return addresses.stream().filter(address -> address.getId().equals(addressId)).findAny().orElse(null);
+	}
+	
+	public Address getBillingAddress(Set<Address> addresses) {
+		this.addresses = addresses;
+		for(Address custAddress : addresses) {
+			if (custAddress.isBillingAddress()) {
+				return custAddress;
+			}
+		}
+		return null;
+	}
+		
+	
 
 	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
+	
 
 	public String getName() {
 		return name;
@@ -51,7 +86,13 @@ public class Customer implements Serializable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	public Set<Address> getAddresses() {
+		return addresses;
+	}
 
+	public void setAddresses(Set<Address> addresses) {
+		this.addresses = addresses;
+	}
 	
 
 	@Override
@@ -79,13 +120,20 @@ public class Customer implements Serializable {
 		return true;
 	}
 
-	public Address getBillingAddress() {
-		return billingAddress;
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", name=" + name + ", phoneNumber=" + phoneNumber + ", addresses="
+				+ addresses + "]";
 	}
 
-	public void setBillingAddress(Address billingAddress) {
-		this.billingAddress = billingAddress;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+		
 	}
+
+
+
+	
 
 	
 }

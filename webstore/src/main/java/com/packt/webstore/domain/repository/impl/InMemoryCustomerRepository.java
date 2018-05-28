@@ -17,16 +17,21 @@ import org.springframework.stereotype.Repository;
 import com.packt.webstore.domain.Address;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.repository.CustomerRepository;
+import com.packt.webstore.exception.AddressNotFoundException;
 import com.packt.webstore.exception.CustomerNotFoundException;
+import com.packt.webstore.service.CustomerService;
 
 
 
 @Repository
 public class InMemoryCustomerRepository implements CustomerRepository {
 
-	@Autowired
-	private NamedParameterJdbcTemplate jdbcTempleate;
+	 @Autowired
+	   private NamedParameterJdbcTemplate jdbcTempleate;
+	 
 	
+	   
+
 	
 	@Override
 	public List<Customer> getAllCustomers() {
@@ -41,15 +46,15 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 
 
 	@Override
-	public void createCustomer(Customer customer) {
-		long addressId = saveAddress(customer.getBillingAddress());
+	public Long createCustomer(Customer newCustomer) {
+		long billingAddressId = 0;
 		
-		String SQL = "INSERT INTO CUSTOMERS(NAME,PHONE_NUMBER,BILLING_ADDRESS) "
-				+ "VALUES (:name, :phoneNumber, :addressId)";
+		String SQL = "INSERT INTO CUSTOMERS(NAME,PHONE_NUMBER,BILLING_ADDRESS_ID) "
+				+ "VALUES (:name, :phoneNumber, :billingAddressId)";
 				Map<String, Object> params = new HashMap<String, Object>();
-				params.put("name", customer.getName());
-				params.put("phoneNumber", customer.getPhoneNumber());
-				params.put("addressId", addressId);
+				params.put("name", newCustomer.getName());
+				params.put("phoneNumber", newCustomer.getPhoneNumber());
+				params.put("billingAddressId", billingAddressId);
 		
 				SqlParameterSource paramSource = new
 						MapSqlParameterSource(params);
@@ -57,13 +62,15 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 						jdbcTempleate.update(SQL, paramSource,keyHolder, new
 						String[]{"ID"});
 						
+						return keyHolder.getKey().longValue();
+						
 						}
 		
 		
 	
-	private long saveAddress(Address address) {
+	private long saveBillingAddress(Address address) {
 		String SQL = "INSERT INTO ADDRESS(DOOR_NO,STREET_NAME,AREA_NAME,STATE,COUNTRY,ZIP) "
-		+ "VALUES (:doorNo, :streetName, :areaName, :state, :country, :zip)";
+		+ "VALUES (:doorNo, :streetName, :areaName, :state, :country, :zip, :billingAddress)";
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("doorNo", address.getDoorNo());
@@ -72,6 +79,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		params.put("state", address.getState());
 		params.put("country", address.getCountry());
 		params.put("zip", address.getZipCode());
+		params.put("billingAddress", address.isBillingAddress());
 		
 		SqlParameterSource paramSource = new
 		MapSqlParameterSource(params);
@@ -84,7 +92,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 
 	@Override
 	public List<Customer> readCustomer(String custId) {
-		String SQL = "SELECT * WHERE CUSTOMER_ID = :cust_Id";
+		String SQL = "SELECT * CUSTOMER WHERE CUSTOMER_ID = :cust_Id";
 		Map<String, Object> params = new HashMap<>();
 		params.put("cust_Id", custId);
 		return jdbcTempleate.query(SQL, params, new CustomerMapper());
@@ -115,10 +123,26 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		throw new CustomerNotFoundException(customerId);
 		}
 		}
+
+
+
+
+	@Override
+	public Address getAddressById(Long addressId) {
+		String SQL = "SELECT * FROM ADDRESS WHERE ID = :addressId";
+		Map<String, Object> params = new HashMap<>();
+		params.put("addressId", addressId);
+		try {
+			return jdbcTempleate.queryForObject(SQL, params, new AddressMapper());
+			} catch (DataAccessException e) {
+			throw new AddressNotFoundException(addressId);
+			}
+			}
+	}
 	
 
 
-}
+
 
 
 	

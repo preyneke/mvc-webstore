@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.packt.webstore.domain.Address;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.repository.CustomerRepository;
 import com.packt.webstore.service.CustomerService;
@@ -24,9 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 	@Override
-	public void createCustomer(Customer customer) {
+	public Long createCustomer(Customer newCustomer) {
 		
-		customerRepository.createCustomer(customer);
+		return customerRepository.createCustomer(newCustomer);
 		
 		
 	}
@@ -36,6 +37,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer getCustomerById(String customerId) {
 		
 		return customerRepository.getCustomerById(customerId);
+	}
+
+
+	@Override
+	public Address getAddressById(Long addressId) {
+		
+		return customerRepository.getAddressById(addressId);
 	}
 
 

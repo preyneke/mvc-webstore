@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.packt.webstore.domain.Address;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.exception.CustomerNotFoundException;
-
 import com.packt.webstore.service.CustomerService;
 import com.packt.webstore.validator.CustomerValidator;
 
@@ -45,13 +45,17 @@ public class CustomerController {
 	public String getAddNewCustomerForm(Model model) {
 		
 		Customer newCustomer = new Customer();
+		
 		model.addAttribute("newCustomer", newCustomer);
+	
 
 		return "addCustomer";
 	}
 	
 	@RequestMapping(value = "/customers/add", method= RequestMethod.POST)
-	public String processAddNewCustomerForm(@ModelAttribute("newCustomer")@Valid Customer newCustomer, BindingResult result) {
+	public String processAddNewCustomerForm(@ModelAttribute("newCustomer")@Valid Customer newCustomer,
+											@ModelAttribute("newCustomer")@Valid Address newAddress,
+											 BindingResult result) {
 String[] suppressedFields = result.getSuppressedFields();
 		
 		if (suppressedFields.length > 0) {
@@ -90,6 +94,7 @@ String[] suppressedFields = result.getSuppressedFields();
 									"billingAddress.state",
 									"billingAddress.country",
 									"billingAddress.zipCode",
+									"billingAddress.isBillingAdress",
 									"language");
 		binder.setValidator(customerValidator);
 	}

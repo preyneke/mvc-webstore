@@ -9,15 +9,23 @@ private String areaName;
 private String state;
 private String country;
 private String zipCode;
+private boolean billingAddress;
+private boolean shippingAddress;
+
 
 
 
 public Address() {
+		
+}
+public Address(Long id) {
+	this.id = id;
 	
 }
 public Long getId() {
 return id;
 }
+
 
 	public void setId(long id) {
 		this.id = id;
@@ -75,6 +83,25 @@ return id;
 	
 
 
+	public boolean isBillingAddress() {
+		return billingAddress;
+	}
+	public void setBillingAddress(boolean billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+	public boolean isShippingAddress() {
+		return shippingAddress;
+	}
+	public void setShippingAddress(boolean shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+	
+	public boolean setBillingAddressState(String billingAddress) {
+		if(billingAddress == "true") {
+			this.billingAddress = true;
+		}
+		return this.billingAddress;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,6 +126,12 @@ return id;
 			return false;
 		return true;
 	}
-	
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", doorNo=" + doorNo + ", streetName=" + streetName + ", areaName=" + areaName
+				+ ", state=" + state + ", country=" + country + ", zipCode=" + zipCode + ", billingAddress="
+				+ billingAddress + ", shippingAddress=" + shippingAddress + "]";
+	}
+
 	
 }

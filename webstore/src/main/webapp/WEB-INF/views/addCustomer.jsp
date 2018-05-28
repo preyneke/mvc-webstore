@@ -69,6 +69,11 @@
                      class="form:input-large" />
                </div>
             </div>
+            <div class="form-group">
+              
+               <form:input id="billingAddress" path="billingAddress.isBillingAdress" type="checkbox" checked="true" style="display:none;" />
+            </div>
+            
 					
 					
 				

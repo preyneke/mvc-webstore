@@ -2,12 +2,13 @@ package com.packt.webstore.domain.repository;
 
 import java.util.List;
 
+import com.packt.webstore.domain.Address;
 import com.packt.webstore.domain.Customer;
 
 
 public interface CustomerRepository {
 	
-	void createCustomer(Customer customer);
+	Long createCustomer(Customer newCustomer);
 	
 	List<Customer> getAllCustomers();
 
@@ -18,6 +19,10 @@ public interface CustomerRepository {
 	void deleteCustomer(String custId);
 	
 	Customer getCustomerById(String customerId);
+	
+	
+
+	Address getAddressById(Long addressId);
 	
 	
 	
