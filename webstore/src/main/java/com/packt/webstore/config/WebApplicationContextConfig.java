@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -43,6 +44,7 @@ import com.packt.webstore.validator.CustomerValidator;
 //import com.packt.webstore.validator.ProductImageValidator;
 import com.packt.webstore.validator.ProductValidator;
 import com.packt.webstore.validator.UnitsInStockValidator;
+import com.packt.webstore.validator.BillingAddressValidator;
 
 @Configuration
 @EnableWebMvc
@@ -50,6 +52,8 @@ import com.packt.webstore.validator.UnitsInStockValidator;
 public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	
 	 
+
+
 	public void configureDefaultServletHandeling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
@@ -195,10 +199,16 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public CustomerValidator customerValidator () {
+		Set<Validator> springValidators = new HashSet<>();
+		springValidators.add(new BillingAddressValidator());
 		
 	CustomerValidator customerValidator = new CustomerValidator();
+	customerValidator.setSpringValidators(springValidators);
 	return customerValidator;
 	}
+	
+	
+	
 	
 	
 	

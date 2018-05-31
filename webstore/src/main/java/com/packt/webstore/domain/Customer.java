@@ -17,7 +17,7 @@ import com.packt.webstore.validator.CustomerId;
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 2284040482222162898L;
 	
-	@CustomerId
+	
 	private Long customerId;
 	@NotEmpty( message="Please enter your name")
 	private String name;

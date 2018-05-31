@@ -10,15 +10,15 @@ public class Address implements Serializable{
 private static final long serialVersionUID = -530086768384258062L;
 
 private Long id;
-@NotEmpty(message="Please enter door number")
+
 private String doorNo;
-@NotEmpty(message="Please enter street Name")
+
 private String streetName;
-@NotEmpty(message="Please enter Area Name")
+
 private String areaName;
-@NotEmpty(message="Please enter State")
+
 private String state;
-@NotEmpty(message="Please enter Country")
+
 private String country;
 
 private String zipCode;

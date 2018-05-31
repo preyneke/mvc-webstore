@@ -21,72 +21,99 @@
          <div class="container">
             <h1>Customer</h1>
             <p>Customer details</p>
+            
          </div>
       </div>
    </section>
    <section class="container">
-      <form:form modelAttribute="newCustomer" class="form-horizontal">
+      <form:form modelAttribute="newCustomer" class="form-horizontal" method="POST">
+      <form:errors path="*" cssClass="alert alert-danger" element="div"/>
          <fieldset>
             <legend>Customer Details</legend>
            
-            <div class="form-group">
+           
+            
+             <div class="form-group">
                <label class="control-label col-lg-2" for="name">Name</label>
                <div class="col-lg-10">
                   <form:input id="name" path="name" type="text" class="form:input-large" />
+                  <form:errors path="name" cssClass="alert alert-danger" />
+               </div>
+            </div>
+            
+             
+            <div class="form-group">
+               <label class="control-label col-lg-2" for="doorNo">Door No</label>
+               <div class="col-lg-10">
+                  <form:input id="doorNo"  path="billingAddress.doorNo" type="text"
+                     class="form:input-large" />
+                     <form:errors path="billingAddress.doorNo" cssClass="alert alert-danger" />
+                     
+               </div>
+            </div>
+           
+            
+            <div class="form-group">
+               <label class="control-label col-lg-2" for="streetName">Street Name</label>
+               <div class="col-lg-10">
+                  <form:input id="streetName"  path="billingAddress.streetName" type="text"
+                     class="form:input-large" />
+                      <form:errors path="billingAddress.streetName" cssClass="alert alert-danger" />
+                     
+               </div>
+            </div>
+           
+            <div class="form-group">
+               <label class="control-label col-lg-2" for="billingAddress.areaName">Area Name</label>
+               <div class="col-lg-10">
+                  <form:input id="areaName"  path="billingAddress.areaName" type="text"
+                     class="form:input-large" />
+                      <form:errors path="billingAddress.areaName" cssClass="alert alert-danger" />
+                       
                </div>
             </div>
             
             <div class="form-group">
-               <label class="control-label col-lg-2" for="doorNo">Door No</label>
-               <div class="col-lg-10">
-                  <form:input id="doorNo" path="billingAddress.doorNo" type="text"
-                     class="form:input-large" />
-               </div>
-            </div>
-            <div class="form-group">
-               <label class="control-label col-lg-2" for="streetName">Street Name</label>
-               <div class="col-lg-10">
-                  <form:input id="streetName" path="billingAddress.streetName" type="text"
-                     class="form:input-large" />
-               </div>
-            </div>
-            <div class="form-group">
-               <label class="control-label col-lg-2" for="billingAddress.areaName">Area Name</label>
-               <div class="col-lg-10">
-                  <form:input id="areaName" path="billingAddress.areaName" type="text"
-                     class="form:input-large" />
-               </div>
-            </div>
-            <div class="form-group">
                <label class="control-label col-lg-2" for="state">State</label>
                <div class="col-lg-10">
-                  <form:input id="state" path="billingAddress.state" type="text"
+                  <form:input id="state"  path="billingAddress.state" type="text"
                      class="form:input-large" />
+                      <form:errors path="billingAddress.state" cssClass="alert alert-danger" />
+                     
                </div>
             </div>
+            
+            
             <div class="form-group">
                <label class="control-label col-lg-2" for="country">country</label>
                <div class="col-lg-10">
-                  <form:input id="country" path="billingAddress.country" type="text"
+                  <form:input id="country"  path="billingAddress.country" type="text"
                      class="form:input-large" />
+                      <form:errors path="billingAddress.country" cssClass="alert alert-danger" />
+                    
                </div>
             </div>
+            
             <div class="form-group">
                <label class="control-label col-lg-2" for="zipCode">Zip Code</label>
                <div class="col-lg-10">
-                  <form:input id="zipCode" path="billingAddress.zipCode" type="text"
+                  <form:input id="zipCode"  path="billingAddress.zipCode" type="text"
                      class="form:input-large" />
+                      <form:errors path="billingAddress.zipCode" cssClass="alert alert-danger" />
+                     
                </div>
             </div>
             
             <div class="form-group">
                <label class="control-label col-lg-2" for="phoneNumber">Phone Number</label>
                <div class="col-lg-10">
-                  <form:input id="phoneNumber" path="phoneNumber" type="text"
+                  <form:input id="phoneNumber"  path="phoneNumber" type="text"
                      class="form:input-large" />
+                      <form:errors path="phoneNumber" cssClass="alert alert-danger" />
+                     
                </div>
             </div>
-            
+           
             <input  type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
             
             <div class="form-group">

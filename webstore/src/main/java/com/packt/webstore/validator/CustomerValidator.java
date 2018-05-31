@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
@@ -45,14 +46,12 @@ public class CustomerValidator implements Validator {
 	 
 	 
 	 public CustomerValidator() {
-		   springValidators = new HashSet<Validator>();   
+		 springValidators = new HashSet<Validator>();
+		     
 	   }
 	 
 
-	public CustomerValidator(Set<Validator> springValidators) {
-		super();
-		this.springValidators = springValidators;
-	}
+	
 	
 	
 

@@ -17,9 +17,9 @@
 	<view-state id="loadCustomerInfo"
 		view="loadCustomerInfo.jsp" model="newCustomer">
 		<transition on="loadCustomerInfoCollected"
-			to="verifyCustomer" />
+			to="verifyCustomer" validate="false"/>
 			<transition on="newCustomerInfo"
-			to="collectCustomerInfo" />
+			to="collectCustomerInfo" validate="false"/>
 			</view-state>
 			<action-state id="verifyCustomer">
 		<evaluate
@@ -32,15 +32,15 @@
 	<view-state id="customerNotFoundWarning"
 		view="customerNotFoundWarning.jsp" model="newCustomer">
 		<transition on="loadCustomerInfoCollected"
-			to="verifyCustomer" />
+			to="verifyCustomer" validate="false"/>
 		<transition on="newCustomerInfo"
-			to="collectCustomerInfo" />
+			to="collectCustomerInfo" validate="false" />
 			</view-state>
 	
 	<view-state id="collectLoadedCustomerInfo"
 		view="collectLoadedCustomerInfo.jsp" model="order">
 		<transition on="customerInfoCollected"
-			to="collectShippingDetail" />
+			to="collectShippingDetail" validate="false" />
 			
 	</view-state>
 	
@@ -51,8 +51,8 @@
 	</view-state>
 	
 	<view-state id="collectShippingDetail" model="order">
-		<transition on="shippingDetailCollected" to="orderConfirmation" />
-		<transition on="backToCollectCustomerInfo" to="collectCustomerInfo" />
+		<transition on="shippingDetailCollected" to="orderConfirmation" validate="false"/>
+		<transition on="backToCollectCustomerInfo" to="collectCustomerInfo" validate="false" />
 	</view-state>
 	
 	<view-state id="orderConfirmation">
@@ -66,16 +66,16 @@
 	</action-state>
 	
 	<view-state id="invalidCartWarning">
-		<transition to="endState" />
+		<transition to="endState" validate="false" />
 	</view-state>
 	
 	<view-state id="thankCustomer" model="order">
-		<transition to="endState" />
+		<transition to="endState" validate="false"/>
 	</view-state>
 	
 	<end-state id="endState" />
 	<end-state id="cancelCheckout" view="checkOutCancelled.jsp" />
 	<global-transitions>
-		<transition on="cancel" to="cancelCheckout" />
+		<transition on="cancel" to="cancelCheckout" validate="false"/>
 	</global-transitions>
 </flow>
