@@ -24,7 +24,7 @@
 				<p>
 					<strong>Availble units in stock </strong> : ${product.unitsInStock}
 				</p>
-				<h4>${product.unitPrice}USD</h4>
+				<h4>R${product.unitPrice}</h4>
 				<p data-ng-controller="cartCtrl">
 					<a href="<spring:url value="/market/products" />"
 						class="btn btn-default"> <span

@@ -30,7 +30,7 @@ result="newCustomer.customerId"/>
 <end-state id="endState"/>
 <end-state id="cancelCreateCustomer" view = "createCustomerCancelled.jsp"/>
 <global-transitions>
-<transition on = "cancel" to="cancelCreateCustomer" />
+<transition on = "cancel" to="cancelCreateCustomer" validate="false" />
 </global-transitions>
 </flow>
 

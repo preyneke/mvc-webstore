@@ -40,7 +40,7 @@
 	<view-state id="collectLoadedCustomerInfo"
 		view="collectLoadedCustomerInfo.jsp" model="order">
 		<transition on="customerInfoCollected"
-			to="collectShippingDetail" validate="false" />
+			to="collectShippingDetail"  />
 			
 	</view-state>
 	

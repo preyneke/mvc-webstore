@@ -23,7 +23,7 @@
 					<td>{{item.product.productId}}- {{item.product.name}}</td>
 					<td>{{item.product.unitPrice}}</td>
 					<td>{{item.quantity}}</td>
-					<td>{{item.totalPrice}}</td>
+					<td>R{{item.totalPrice}}</td>
 					<td><a href="#" class="label label-danger" data-ng-click="removeFromCart(item.product.productId)"> <span
                      class="glyphicon glyphicon-remove" /></span> Remove
                </a></td>
@@ -32,7 +32,7 @@
 					<th></th>
 					<th></th>
 					<th>Grand Total</th>
-					<th>{{cart.grandTotal}}</th>
+					<th>R{{cart.grandTotal}}</th>
 					<th></th>
 				</tr>
 			</table>

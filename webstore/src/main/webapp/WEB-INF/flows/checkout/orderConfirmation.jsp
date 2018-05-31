@@ -81,8 +81,8 @@
                               <td class="col-md-9"><em>${cartItem.product.name}</em></td>
                               <td class="col-md-1" style="text-align: center">
                                  ${cartItem.quantity}</td>
-                              <td class="col-md-1 text-center">$${cartItem.product.unitPrice}</td>
-                              <td class="col-md-1 text-center">$${cartItem.totalPrice}</td>
+                              <td class="col-md-1 text-center">R${cartItem.product.unitPrice}</td>
+                              <td class="col-md-1 text-center">R${cartItem.totalPrice}</td>
                            </tr>
                         </c:forEach>
                         <tr>
@@ -92,7 +92,7 @@
                                  <strong>Grand Total: </strong>
                               </h4></td>
                            <td class="text-center text-danger"><h4>
-                                 <strong>$${order.cart.grandTotal}</strong>
+                                 <strong>R${order.cart.grandTotal}</strong>
                               </h4></td>
                         </tr>
                      </tbody>
