@@ -17,6 +17,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
 	@Override
 	public void updateAllStock() {
 	List<Product> allProducts =
@@ -71,4 +72,15 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 	
+	@Override
+	public void updateStockAfterSale(String productId, int quantity) {
+		Product productToUpdate = productRepository.getProductById(productId);
+		Long updatedamount = new Long(Long.sum(productToUpdate.getUnitsInStock(), -quantity));
+		
+		productRepository.updateStock(productId, updatedamount);
+				}
+				
+		
 	}
+	
+	

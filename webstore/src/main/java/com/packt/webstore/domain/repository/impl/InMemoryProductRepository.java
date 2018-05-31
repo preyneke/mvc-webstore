@@ -152,6 +152,13 @@ public class InMemoryProductRepository implements ProductRepository {
 	}
 
 
+	@Override
+	public void updateStockAfterSale(String productId, int quantity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 
 	

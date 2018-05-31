@@ -10,7 +10,7 @@ import com.packt.webstore.exception.CustomerNotFoundException;
 
 import com.packt.webstore.service.CustomerService;
 
-public class CustomerIdValidator implements ConstraintValidator<CustomerId, String> {
+public class CustomerIdValidator implements ConstraintValidator<CustomerId, Long> {
 	@Autowired
 	private CustomerService customerService;
 	
@@ -23,10 +23,10 @@ public class CustomerIdValidator implements ConstraintValidator<CustomerId, Stri
 	}
 
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
+	public boolean isValid(Long value, ConstraintValidatorContext context) {
 		Customer customer;
 		try {
-			customer = customerService.getCustomerById(value);
+			customer = customerService.read(value);
 			} catch (CustomerNotFoundException e) {
 			return true;
 			}

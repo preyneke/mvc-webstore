@@ -7,14 +7,15 @@ public class CustomerNotFoundException  extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 4807773135661735009L;
 
-	private String customerId;
+	private Long customerId;
 
-	public CustomerNotFoundException(String customerId) {
-		
-		this.customerId = customerId;
+
+
+	public CustomerNotFoundException(Long custId) {
+		this.customerId = custId;
 	}
 
-	public String getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 	

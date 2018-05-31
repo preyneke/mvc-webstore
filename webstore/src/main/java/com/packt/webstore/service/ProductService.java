@@ -11,6 +11,8 @@ public interface ProductService {
 	
 	void updateAllStock();
 	
+	void updateStockAfterSale(String productId, int quantity);
+	
 	List<Product> getAllProducts();
 	List<Product> getProductsByCategory(String category);
 	List<Product> getProductsByFilter(Map<String, List<String>> filterParams);

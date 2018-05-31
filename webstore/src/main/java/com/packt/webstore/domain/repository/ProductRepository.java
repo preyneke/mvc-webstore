@@ -18,6 +18,7 @@ public interface ProductRepository {
 	List<Product> getProductsByManufacturer(String manufacturer);
 	List<Product> getProductsByPrice(BigDecimal low, BigDecimal high);
 	void addProduct(Product product);
+	void updateStockAfterSale(String productId, int quantity);
 	
 	
 

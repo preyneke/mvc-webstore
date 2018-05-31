@@ -33,6 +33,7 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
+import org.springframework.webflow.action.FormAction;
 
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.Product;
@@ -122,6 +123,8 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		resolver.setDefaultViews(views);
 		return resolver;
 	}
+	
+	
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry

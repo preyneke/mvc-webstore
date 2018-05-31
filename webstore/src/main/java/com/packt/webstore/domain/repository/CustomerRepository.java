@@ -4,21 +4,24 @@ import java.util.List;
 
 import com.packt.webstore.domain.Address;
 import com.packt.webstore.domain.Customer;
+import com.packt.webstore.dto.CustomerDto;
 
 
 public interface CustomerRepository {
 	
-	Long createCustomer(Customer newCustomer);
+	Long create(Customer newCustomer);
 	
 	List<Customer> getAllCustomers();
 
 	
 	
-	List<Customer> readCustomer(String custId);
+	Customer read(Long customerId);
 	
-	void deleteCustomer(String custId);
 	
-	Customer getCustomerById(String customerId);
+	
+	void delete(Long custId);
+	
+	Customer getCustomerById(Long customerId);
 	
 	
 

@@ -1,6 +1,7 @@
 package com.packt.webstore.domain.repository.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,14 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.packt.webstore.domain.Address;
+import com.packt.webstore.domain.CartItem;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.Order;
+
 import com.packt.webstore.domain.ShippingDetail;
 import com.packt.webstore.domain.repository.OrderRepository;
 import com.packt.webstore.service.CartService;
+import com.packt.webstore.service.ProductService;
 
 @Repository
 public class InMemoryOrderRepository implements OrderRepository {
@@ -25,6 +29,8 @@ public class InMemoryOrderRepository implements OrderRepository {
 	private NamedParameterJdbcTemplate jdbcTempleate;
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private ProductService productService;
 
 	@Override
 	public long saveOrder(Order order) {
@@ -33,6 +39,13 @@ public class InMemoryOrderRepository implements OrderRepository {
 		order.getCustomer().setCustomerId(customerId);
 		order.getShippingDetail().setId(shippingDetailId);
 		long createdOrderId = createOrder(order);
+		List<CartItem> productsInCart = order.getCart().getCartItems();
+		for(CartItem cartItem: productsInCart) {
+			String productId = cartItem.getProduct().getProductId();
+			int quantity = cartItem.getQuantity();
+			productService.updateStockAfterSale(productId, quantity);
+			
+		}
 		cartService.clearCart(order.getCart().getId());
 		return createdOrderId;
 	}
@@ -67,7 +80,7 @@ public class InMemoryOrderRepository implements OrderRepository {
 					MapSqlParameterSource(params);
 					KeyHolder keyHolder = new GeneratedKeyHolder();
 					jdbcTempleate.update(SQL, paramSource,keyHolder, new
-					String[]{"ID"});
+					String[]{"CUSTOMER_ID"});
 					return keyHolder.getKey().longValue();
 		}
 		
@@ -92,7 +105,7 @@ public class InMemoryOrderRepository implements OrderRepository {
 		
 		
 		private long createOrder(Order order) {
-			String SQL = "INSERT INTO ORDERS(CART_ID,CUSTOMER_ID,SHIPPING_DETAIL_ID) "
+			String SQL = "INSERT INTO ORDERS(CART_ID, CUSTOMER_ID, SHIPPING_DETAIL_ID) "
 			+ "VALUES (:cartId, :customerId, :shippingDetailId)";
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("id", order.getOrderId());

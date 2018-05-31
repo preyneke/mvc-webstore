@@ -13,6 +13,10 @@ public class Order implements Serializable {
 		this.customer = new Customer();
 		this.shippingDetail = new ShippingDetail();
 	}
+	
+	public Order(Customer loadCustomer) {
+		this.customer = loadCustomer;
+	}
 
 	public Long getOrderId() {
 		return orderId;

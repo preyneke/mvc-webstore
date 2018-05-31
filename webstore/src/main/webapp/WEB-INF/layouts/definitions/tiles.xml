@@ -34,6 +34,13 @@
       <put-attribute name="content" value="/WEB-INF/views/customers.jsp" />
    </definition>
    
+   <definition name="customer" extends="baseLayout">
+      <put-attribute name="title" value="Customers" />
+      <put-attribute name="heading" value="Customers" />
+      <put-attribute name="tagline" value="All the customers in our store" />
+      <put-attribute name="content" value="/WEB-INF/views/customer.jsp" />
+   </definition>
+   
    <definition name="product" extends="baseLayout">
       <put-attribute name="title" value="Product" />
       <put-attribute name="heading" value="Product" />

@@ -26,7 +26,7 @@
             <div class="form-group">
                <label class="control-label col-lg-2 col-lg-2" for="name" />Name</label>
                <div class="col-lg-10">
-                  <form:input id="name" path="name" type="text" class="form:input-large" />
+                  <form:input id="name" path="name" type="text" class="form:input-large" value="${order.customer.name}" />
                </div>
             </div>
             <div class="form-group">
@@ -38,43 +38,42 @@
             <div class="form-group">
                <label class="control-label col-lg-2" for="doorNo">Door No</label>
                <div class="col-lg-10">
-                  <form:input id="doorNo" path="shippingAddress.doorNo" type="text"
-                     class="form:input-large" />
+                  <form:input id="doorNo" path="shippingAddress.doorNo" type="text" class="form:input-large" value="${order.customer.billingAddress.doorNo}" />
                </div>
             </div>
             <div class="form-group">
                <label class="control-label col-lg-2" for="streetName">Street Name</label>
                <div class="col-lg-10">
                   <form:input id="streetName" path="shippingAddress.streetName." type="text"
-                     class="form:input-large" />
+                     class="form:input-large" value="${order.customer.billingAddress.streetName}"/>
                </div>
             </div>
             <div class="form-group">
                <label class="control-label col-lg-2" for="areaName">Area Name</label>
                <div class="col-lg-10">
                   <form:input id="areaName" path="shippingAddress.areaName" type="text"
-                     class="form:input-large" />
+                     class="form:input-large" value="${order.customer.billingAddress.areaName}" />
                </div>
             </div>
             <div class="form-group">
                <label class="control-label col-lg-2" for="state">State</label>
                <div class="col-lg-10">
                   <form:input id="state" path="shippingAddress.state" type="text"
-                     class="form:input-large" />
+                     class="form:input-large" value="${order.customer.billingAddress.state}" />
                </div>
             </div>
             <div class="form-group">
                <label class="control-label col-lg-2" for="country">country</label>
                <div class="col-lg-10">
                   <form:input id="country" path="shippingAddress.country" type="text"
-                     class="form:input-large" />
+                     class="form:input-large" value="${order.customer.billingAddress.country}" />
                </div>
             </div>
             <div class="form-group">
                <label class="control-label col-lg-2" for="zipCode">Zip Code</label>
                <div class="col-lg-10">
                   <form:input id="zipCode" path="shippingAddress.zipCode" type="text"
-                     class="form:input-large" />
+                     class="form:input-large" value="${order.customer.billingAddress.zipCode}" />
                </div>
             </div>
             <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>

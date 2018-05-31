@@ -6,10 +6,14 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.message.MessageContext;
+import org.springframework.binding.validation.ValidationContext;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.packt.webstore.domain.Customer;
+import com.packt.webstore.service.CustomerService;
 
 
 public class CustomerValidator implements Validator {
@@ -17,7 +21,27 @@ public class CustomerValidator implements Validator {
 	@Autowired
     private javax.validation.Validator beanValidator;
 	
+	
+	
+	@Autowired
+	private CustomerService customerService;
+	
 	 private Set<Validator> springValidators;
+	 
+	 
+	 public void loadCustomerInfoValidator (Customer newCustomer, ValidationContext context) {
+		 MessageContext messages = context.getMessageContext();
+		 if(customerService.read(newCustomer.getCustomerId())== null) {
+			 messages.addMessage(new MessageBuilder().error().source("customerId").defaultText("No such Customer Found").build());
+		 }
+	 }
+	 
+	 public void collectCustomerInfoValidator (Customer newCustomer, ValidationContext context) {
+		 MessageContext messages = context.getMessageContext();
+		 if(customerService.read(newCustomer.getCustomerId())== null) {
+			 messages.addMessage(new MessageBuilder().error().source("customerId").defaultText("No such Customer Found").build());
+		 }
+	 }
 	 
 	 
 	 public CustomerValidator() {

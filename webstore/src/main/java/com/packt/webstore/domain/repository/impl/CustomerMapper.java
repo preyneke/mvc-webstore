@@ -30,7 +30,7 @@ public class CustomerMapper implements RowMapper<Customer> {
 	
 	public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-			Long id = rs.getLong("ID");
+			Long id = rs.getLong("CUSTOMER_ID");
 			
 			Customer customer = new Customer(id);
 			

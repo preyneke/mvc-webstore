@@ -12,13 +12,16 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.packt.webstore.domain.Address;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.exception.CustomerNotFoundException;
+import com.packt.webstore.exception.NoProductsFoundUnderCategoryException;
 import com.packt.webstore.service.CustomerService;
 import com.packt.webstore.validator.CustomerValidator;
 
@@ -41,37 +44,17 @@ public class CustomerController {
 		
 		
 }
-	@RequestMapping(value = "/customers/add", method = RequestMethod.GET)
-	public String getAddNewCustomerForm(Model model) {
+	@RequestMapping(value = "/customer",  method =  RequestMethod.GET)
+	   public String read(@RequestParam(value ="customerId", required=false) Long customerId, Model model ) {
 		
-		Customer newCustomer = new Customer();
 		
-		model.addAttribute("newCustomer", newCustomer);
+		model.addAttribute("customer",customerService.read(customerId)) ;
+	      return "customer";
+	   }
+	
 	
 
-		return "addCustomer";
-	}
 	
-	@RequestMapping(value = "/customers/add", method= RequestMethod.POST)
-	public String processAddNewCustomerForm(@ModelAttribute("newCustomer")@Valid Customer newCustomer,
-											@ModelAttribute("newCustomer")@Valid Address newAddress,
-											 BindingResult result) {
-String[] suppressedFields = result.getSuppressedFields();
-		
-		if (suppressedFields.length > 0) {
-		throw new RuntimeException("Attempting to bind disallowed fields: " +
-		StringUtils.arrayToCommaDelimitedString(suppressedFields));
-		}
-		
-		if(result.hasErrors()) {
-			return "addCustomer";
-		}
-		
-		
-		customerService.createCustomer(newCustomer);
-		
-		return "redirect:/customers";
-	}
 	// exception handeling
 		@ExceptionHandler(CustomerNotFoundException.class)
 		public ModelAndView handleError(HttpServletRequest req, CustomerNotFoundException exception) {
@@ -87,6 +70,7 @@ String[] suppressedFields = result.getSuppressedFields();
 	@InitBinder
 	public void initialiseBinder(WebDataBinder binder) {
 		binder.setAllowedFields("name",
+									
 									"phoneNumber",
 									"billingAddress.doorNo",
 									"billingAddress.streetName",

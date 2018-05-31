@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -14,9 +15,11 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import com.jayway.jsonpath.ParseContext;
 import com.packt.webstore.domain.Address;
 import com.packt.webstore.domain.Customer;
 import com.packt.webstore.domain.repository.CustomerRepository;
+import com.packt.webstore.dto.CustomerDto;
 import com.packt.webstore.exception.AddressNotFoundException;
 import com.packt.webstore.exception.CustomerNotFoundException;
 import com.packt.webstore.service.CustomerService;
@@ -49,7 +52,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 
 
 	@Override
-	public Long createCustomer(Customer newCustomer) {
+	public Long create(Customer newCustomer) {
 		long billingAddressId = saveBillingAddress(newCustomer.getBillingAddress());
 		
 		String SQL = "INSERT INTO CUSTOMERS(NAME,PHONE_NUMBER,BILLING_ADDRESS_ID) "
@@ -63,7 +66,7 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 						MapSqlParameterSource(params);
 						KeyHolder keyHolder = new GeneratedKeyHolder();
 						jdbcTempleate.update(SQL, paramSource,keyHolder, new
-						String[]{"ID"});
+						String[]{"CUSTOMER_ID"});
 						
 						return keyHolder.getKey().longValue();
 						
@@ -94,19 +97,24 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 
 
 	@Override
-	public List<Customer> readCustomer(String custId) {
-		String SQL = "SELECT * CUSTOMER WHERE CUSTOMER_ID = :cust_Id";
+	public Customer read(Long customerId) {
+		
+		String SQL = "SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID = :customerId ";
 		Map<String, Object> params = new HashMap<>();
-		params.put("cust_Id", custId);
-		return jdbcTempleate.query(SQL, params, new CustomerMapper(jdbcTempleate, customerService));
+		params.put("customerId", customerId);
 		
 		
-	}
+		try {
+	         return jdbcTempleate.queryForObject(SQL, params, new CustomerMapper(jdbcTempleate, customerService));
+	      } catch (DataAccessException e) {
+	           throw new CustomerNotFoundException(customerId);
+	      }      
+	   }
 
 
 	@Override
-	public void deleteCustomer(String customerId) {
-		String DELETE_CUSTOMER = "DELETE FROM CUSTOMER WHERE CUSTOMER_ID= :cusomertId";
+	public void delete(Long customerId) {
+		String DELETE_CUSTOMER = "DELETE FROM CUSTOMERS WHERE CUSTOMER_ID = :cusomertId ";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("customerId", customerId);
 		
@@ -116,14 +124,15 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 
 
 	@Override
-	public Customer getCustomerById(String customerId) {
-		String SQL = "SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID = :id";
+	public Customer getCustomerById(Long custId) {
+		Long customerId = custId;
+		String SQL = "SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID= :id ";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", customerId);
 		try {
 		return jdbcTempleate.queryForObject(SQL, params, new CustomerMapper(jdbcTempleate, customerService));
 		} catch (DataAccessException e) {
-		throw new CustomerNotFoundException(customerId);
+		throw new CustomerNotFoundException(custId);
 		}
 		}
 
@@ -141,7 +150,10 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 			throw new AddressNotFoundException(addressId);
 			}
 			}
+
+
 	}
+
 	
 
 

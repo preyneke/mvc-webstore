@@ -4,14 +4,21 @@ import java.util.List;
 
 import com.packt.webstore.domain.Address;
 import com.packt.webstore.domain.Customer;
+import com.packt.webstore.dto.CustomerDto;
 
 public interface CustomerService {
 
 	List<Customer> getAllCustomers();
 	
-	Long createCustomer(Customer newCustomer);
+	Long create(Customer newCustomer);
 	
-	Customer getCustomerById(String customerId);
+	Customer read(Long customerId);
+	
+	
+	
+	Customer delete(Long customerId);
 	
 	Address getAddressById(Long addressId);
+
+	Customer validate(Long customerID);
 }

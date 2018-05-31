@@ -2,17 +2,26 @@ package com.packt.webstore.domain;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.packt.webstore.validator.CustomerId;
 
 
 
 
 
+@XmlRootElement
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 2284040482222162898L;
 	
-
+	@CustomerId
 	private Long customerId;
+	@NotEmpty( message="Please enter your name")
 	private String name;
+	@Pattern(regexp="\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}", message="please enter valid phone number")
 	private String phoneNumber;
 	private Address billingAddress;
 	 

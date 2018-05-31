@@ -16,7 +16,7 @@
 		<transition on="backToCollectCustomerDetail" to="collectCustomerInfo" />
 </view-state>
 <action-state id="processCustomer">
-<evaluate expression="customerServiceImpl.createCustomer(newCustomer)"
+<evaluate expression="customerServiceImpl.create(newCustomer)"
 result="newCustomer.customerId"/>
 <transition to="thankCustomer" />
 </action-state>
